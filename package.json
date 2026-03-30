@@ -1,0 +1,29 @@
+{
+  "name": "anything-ai-express",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/shivamitabse/anything-ai-express#readme",
+  "bugs": {
+    "url": "https://github.com/shivamitabse/anything-ai-express/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivamitabse/anything-ai-express.git"
+  },
+  "license": "ISC",
+  "author": "shiva",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.20.0"
+  }
+}
