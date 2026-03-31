@@ -8,8 +8,8 @@ export const createTask = async (req, res) => {
   console.log(uuidv4(), title, description, userId);
 
   await pool.execute(
-    "INSERT INTO tasks (id, title, description, user_id) VALUES (?, ?, ?, ?)",
-    [uuidv4(), title, description, userId],
+    "INSERT INTO tasks (title, description, user_id) VALUES (?, ?, ?)",
+    [title, description, userId],
   );
 
   res.json({ message: "Task created" });
