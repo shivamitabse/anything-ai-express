@@ -12,6 +12,8 @@ export const getMe = (req, res) => {
 
 // REGISTER
 export const register = async (req, res) => {
+  console.log("post request for register is received");
+
   const { email, password } = req.body;
 
   const hashed = await bcrypt.hash(password, 10);
@@ -33,6 +35,9 @@ export const logout = (req, res) => {
 
 // LOGIN
 export const login = async (req, res) => {
+
+  console.log("login request just received");
+
   const { email, password } = req.body;
 
   const [rows] = await pool.execute("SELECT * FROM users WHERE email = ?", [
@@ -40,6 +45,8 @@ export const login = async (req, res) => {
   ]);
 
   const user = rows[0];
+
+  console.log(user);
 
   if (!user) return res.status(401).json({ message: "User not found" });
 
@@ -51,10 +58,13 @@ export const login = async (req, res) => {
     expiresIn: "1h",
   });
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    sameSite: "lax",
-  });
+
+res.cookie("token", token, {
+    httpOnly: true,       // JS on frontend can't access it
+    secure: true,         // only send over HTTPS
+    sameSite: "lax",      // or "strict" depending on your needs
+    maxAge: 24 * 60 * 60 * 1000, // optional: 1 day in ms
+});
 
   res.json({ message: "Login successful" });
 };

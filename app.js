@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://www.testmysite.in", "https://testmysite.in"],
     credentials: true,
   }),
 );
@@ -22,7 +22,7 @@ app.use(
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/tasks", taskRoutes);
 
-app.get("/", (req, res) => {
+app.get("/api/v1/", (req, res) => {
   res.send("API Running...");
 });
 
