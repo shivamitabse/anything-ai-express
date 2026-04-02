@@ -13,7 +13,11 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://www.testmysite.in", "https://testmysite.in"],
+    origin: [
+      "http://localhost:5173",
+      "http://www.testmysite.in",
+      "https://testmysite.in",
+    ],
     credentials: true,
   }),
 );
