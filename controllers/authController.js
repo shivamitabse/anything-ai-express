@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import pool from "../models/db.js";
 
-const JWT_SECRET = "secretkey";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // GET ME
 
@@ -47,9 +47,13 @@ export const login = async (req, res) => {
 
   if (!isMatch) return res.status(401).json({ message: "Invalid password" });
 
-  const token = jwt.sign({ id: user.id, email: user.email }, "secretkey", {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { id: user.id, email: user.email },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    },
+  );
 
   res.cookie("token", token, {
     httpOnly: true, // JS on frontend can't access it

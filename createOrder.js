@@ -7,8 +7,8 @@ const createOrder = async (req, res) => {
   const payment_status = "pending";
 
   let instance = new Razorpay({
-    key_id: "rzp_live_SYvUkytdormQ7g",
-    key_secret: "plgtk1Lre23TY1XX2qW0QrGO",
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
   });
 
   console.log(name);
