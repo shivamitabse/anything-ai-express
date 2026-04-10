@@ -11,8 +11,6 @@ const createOrder = async (req, res) => {
     key_secret: process.env.RAZORPAY_KEY_SECRET,
   });
 
-  console.log(name);
-
   const products = req.body;
 
   const getPrice = () => {
@@ -49,7 +47,6 @@ const createOrder = async (req, res) => {
     await pool.execute(
       `update orders set razorpay_order_id = "${order.id}" where id = "${orderId}"`,
     );
-    console.log(order.id);
 
     res.send({ rpay_order_id: order.id });
   });

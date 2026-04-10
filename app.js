@@ -9,6 +9,7 @@ import { getProducts } from "./getProducts.js";
 import { getProductDetails } from "./getProductDetails.js";
 import { protect } from "./middleware/authMiddleware.js";
 import paymentVerification from "./paymentVerification.js";
+import webhookVerification from "./webhookVerification.js";
 
 dotenv.config();
 
@@ -48,6 +49,12 @@ app.get("/api/v1/get-products/:id", getProductDetails);
 app.post("/api/v1/create-order", protect, createOrder);
 
 app.post("/api/v1/verify-payment", paymentVerification);
+
+app.post("/api/v1/verify-webhook",  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString();
+    }
+  }),   webhookVerification);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server running on port ${PORT}`));
